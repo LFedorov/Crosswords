@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Axis, Word, Crossword, Info } from '../../shared/models';
+import { Axis, Word, Crossword, RawCrossword } from '../../shared/models';
 
 @Injectable()
 export class CrosswordsService {
@@ -10,22 +10,22 @@ export class CrosswordsService {
     constructor(private _http: Http) {
     }
 
-    public getList(): Observable<Array<Info>> {
+    public list(): Observable<Array<RawCrossword>> {
         return this._http
             .get(this.crosswordsListUrl)
             .map(response => response.json())
             .map(json => { return this.converJsonToInfoArray(json); });
     }
 
-    public getCrossword(id: string): Observable<Crossword> {
+    public getById(id: string): Observable<Crossword> {
         return this._http
             .get('api/crosswords/' + id + '.json')
             .map(response => response.json())
             .map(json => { return this.converJsonToCrossword(json); });
     }
 
-    private converJsonToInfoArray(json: any): Array<Info> {
-        let crosswordInfoArray = new Array<Info>();
+    private converJsonToInfoArray(json: any): Array<RawCrossword> {
+        let crosswordInfoArray = new Array<RawCrossword>();
 
         json.Crosswords.forEach(crossword => {
             let crosswordInfo = this.convertJsonToInfo(crossword);
@@ -35,17 +35,13 @@ export class CrosswordsService {
         return crosswordInfoArray;
     }
 
-    private convertJsonToInfo(json: any): Info {
-        return new Info(json.Id);
+    private convertJsonToInfo(json: any): RawCrossword {
+        return new RawCrossword(json.Id);
     }
 
     private converJsonToCrossword(json: any): Crossword {
         let id = json.Id;
         let words: Array<Word> = new Array<Word>();
-
-        // json.Words.sort((a, b) => {
-        //     return a.Direction < b.Direction;
-        // });
 
         json.Words.forEach(word => {
             let crosswordWord = this.convertJsonToWord(word);

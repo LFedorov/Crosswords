@@ -1,4 +1,4 @@
-export class Info {
+export class RawCrossword {
     id: string;
 
     constructor(id: string) {

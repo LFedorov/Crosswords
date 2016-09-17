@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Info } from 'app/shared/models';
+import { RawCrossword } from 'app/shared/models';
 import { CrosswordsService } from '../../services';
 
 @Component({
@@ -8,14 +8,14 @@ import { CrosswordsService } from '../../services';
     styleUrls: ['./crossword-list.component.css']
 })
 export class CrosswordListComponent implements OnInit {
-    public crosswords: Array<Info> = new Array<Info>();
+    public crosswords: Array<RawCrossword> = new Array<RawCrossword>();
 
     constructor(private _crosswordsService: CrosswordsService) {
     }
 
     public ngOnInit(): void {
         this._crosswordsService
-            .getList()
+            .list()
             .subscribe(crosswords => {
                 this.crosswords = crosswords;
             });
