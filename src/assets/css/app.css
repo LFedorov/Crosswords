@@ -1,6 +1,42 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto';
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
-
 html, body {
     font-family: 'Roboto', 'Helvetica', sans-serif;
+    background-color: #cfd8dc;
+}
+
+.mdl-layout__header {
+    height: 54px;
+    min-height: 54px;
+}
+
+.mdl-layout__header-row {
+    height: 54px;
+}
+
+.mdl-layout__header .mdl-layout__drawer-button {
+    line-height: 54px;
+    margin: 4px 12px;
+}
+
+.mdl-layout__header .mdl-layout__drawer-button .material-icons {
+    margin-top: 12px;
+}
+
+.mdl-layout__drawer {
+    border: 0;
+}
+
+.mdl-layout__drawer .mdl-navigation {
+    padding-top: 54px;
+    flex-grow: 1;
+}
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+    display: flex;
+}
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link .material-icons {
+    font-size: 24px;
+    margin-right: 20px;
 }
