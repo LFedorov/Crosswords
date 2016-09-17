@@ -24,6 +24,8 @@ export class Grid {
                 this._height = word.maxY;
             };
         }
+
+        // console.log(`This matrix has ${this._width} width & ${this._height} height.`);
     }
 
     private _createMatrix(): void {
@@ -63,6 +65,10 @@ export class Grid {
     }
 
     public getCellByPosition(x: number, y: number): Cell {
+        if (x < 0 || y < 0) { return null; }
+        if (y > this._matrix.length) { return null; }
+        if (!this._matrix[y] || x > this._matrix[y].length) { return null; }
+
         return this._matrix[y][x];
     }
 

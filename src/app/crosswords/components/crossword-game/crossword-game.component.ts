@@ -165,7 +165,7 @@ export class CrosswordGameComponent implements OnInit {
 
     public _setCurrentCellChar(char: string): void {
         this._currentCell.value = char;
-        this._checkWordSuccess(this._currentWord);
+        // this._checkWordSuccess(this._currentWord);
 
         if (this._currentCell.success) {
             this._clearCurrents();
