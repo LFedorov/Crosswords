@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Info } from 'app/models';
-import { CrosswordsService } from '../../services/crosswords.service';
+import { Info } from 'app/shared/models';
+import { CrosswordsService } from '../../services';
 
 @Component({
     selector: 'app-crossword-list',

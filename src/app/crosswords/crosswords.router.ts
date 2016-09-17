@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
-import { CrosswordListComponent } from './crossword-list';
-import { CrosswordGameComponent } from './crossword-game';
+import { CrosswordListComponent } from './components/crossword-list';
+import { CrosswordGameComponent } from './components/crossword-game';
 
 const routes: Routes = [
     { path: '', component: CrosswordListComponent },

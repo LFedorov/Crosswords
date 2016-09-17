@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Axis, Word, Crossword, Info } from '../models';
+import { Axis, Word, Crossword, Info } from '../../shared/models';
 
 @Injectable()
 export class CrosswordsService {
