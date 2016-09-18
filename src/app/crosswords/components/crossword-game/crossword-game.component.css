@@ -66,9 +66,23 @@
     margin-top: 10px;
     width: 100%;
     height: 100%;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 :host .mdl-snackbar{
     top:54px;
+    left:0;
+    max-width: 100%;
+    min-width: 100%;
+    width:100%;
+    min-height: 48px;
+    max-height: 80px;
+}
+
+:host .mdl-snackbar__text{
+    align-self: center;
+}
+
+:host .mdl-snackbar__action{
+    overflow: initial;
 }

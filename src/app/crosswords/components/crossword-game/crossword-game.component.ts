@@ -20,24 +20,17 @@ export class CrosswordGameComponent implements OnInit {
     constructor(private _route: ActivatedRoute, private _crosswordsService: CrosswordsService) {
     }
 
-    public showSnackbar() {
-        if (!this._currentWord) return;
-        if (this.snackbarActive) return;
-
+    public showQuestion() {
         this.snackbarActive = true;
-        // this.snackbarText = this._currentWord.question;
-        this.snackbarText = `${this._currentWord.question} (${this._currentWord.answer})`;
-        this.snackbarStyle = 'fadeInDown';
-        setTimeout(() => this.hideSnackbar(), 4000);
+        this.snackbarText = this._currentWord.question;
+        this.snackbarStyle = 'slideInDown';
     }
 
-    public hideSnackbar() {
-        if (!this.snackbarActive) return;
-        
-        this.snackbarStyle = 'fadeOutUp';
+    public hideQuestion() {
+        this.snackbarStyle = 'slideOutUp';
         setTimeout(() => {
-            this.snackbarActive = false;
             this.snackbarText = null;
+            this.snackbarActive = false;
         }, 400);
     }
 
@@ -71,6 +64,7 @@ export class CrosswordGameComponent implements OnInit {
     }
 
     public onGridClick(): void {
+        this.hideQuestion();
         this._clearCurrents();
     }
 
@@ -89,7 +83,7 @@ export class CrosswordGameComponent implements OnInit {
 
         this._currentCell = cell;
 
-        this.showSnackbar();
+        this.showQuestion();
 
         event.stopPropagation();
     }
@@ -168,6 +162,7 @@ export class CrosswordGameComponent implements OnInit {
 
         if (answer === word.answer.toUpperCase()) {
             this._setWordCellsSuccess(word);
+            this.hideQuestion();
         }
     }
 
