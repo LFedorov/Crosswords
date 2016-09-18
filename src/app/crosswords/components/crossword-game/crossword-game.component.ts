@@ -22,17 +22,20 @@ export class CrosswordGameComponent implements OnInit {
 
     public showSnackbar() {
         if (!this._currentWord) return;
+        if (this.snackbarActive) return;
 
         this.snackbarActive = true;
         // this.snackbarText = this._currentWord.question;
         this.snackbarText = `${this._currentWord.question} (${this._currentWord.answer})`;
-        this.snackbarStyle = 'fadeIn';
+        this.snackbarStyle = 'fadeInDown';
         setTimeout(() => this.hideSnackbar(), 4000);
     }
 
     public hideSnackbar() {
-        this.snackbarStyle = 'fadeOut';
-        setTimeout(function () {
+        if (!this.snackbarActive) return;
+        
+        this.snackbarStyle = 'fadeOutUp';
+        setTimeout(() => {
             this.snackbarActive = false;
             this.snackbarText = null;
         }, 400);
