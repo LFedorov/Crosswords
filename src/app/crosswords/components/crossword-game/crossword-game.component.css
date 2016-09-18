@@ -15,6 +15,7 @@
 }
 
 .crossword .grid {
+    margin: 0 auto;
     padding: 40px;
     border-spacing: 0;
     border-collapse: separate;
@@ -69,20 +70,25 @@
     font-size: 20px;
 }
 
-:host .mdl-snackbar{
-    top:54px;
-    left:0;
+:host .mdl-snackbar {
+    top: 54px;
+    left: 0;
     max-width: 100%;
     min-width: 100%;
-    width:100%;
+    width: 100%;
     min-height: 48px;
     max-height: 80px;
 }
 
-:host .mdl-snackbar__text{
+:host .mdl-snackbar__text {
     align-self: center;
 }
 
-:host .mdl-snackbar__action{
+:host .mdl-snackbar__action {
     overflow: initial;
+}
+
+:host::-webkit-scrollbar {
+    width: 0px;
+    /*background: transparent;*/
 }
