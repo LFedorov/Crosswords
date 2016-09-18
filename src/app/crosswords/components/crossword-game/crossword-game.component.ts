@@ -13,7 +13,29 @@ export class CrosswordGameComponent implements OnInit {
     private _currentCell: Cell;
     public crossword: Crossword;
 
+    public snackbarActive: boolean = false;
+    public snackbarText: string = null;
+    public snackbarStyle: string = null;
+
     constructor(private _route: ActivatedRoute, private _crosswordsService: CrosswordsService) {
+    }
+
+    public showSnackbar() {
+        if (!this._currentWord) return;
+
+        this.snackbarActive = true;
+        // this.snackbarText = this._currentWord.question;
+        this.snackbarText = `${this._currentWord.question} (${this._currentWord.answer})`;
+        this.snackbarStyle = 'fadeIn';
+        setTimeout(() => this.hideSnackbar(), 4000);
+    }
+
+    public hideSnackbar() {
+        this.snackbarStyle = 'fadeOut';
+        setTimeout(function () {
+            this.snackbarActive = false;
+            this.snackbarText = null;
+        }, 400);
     }
 
     public ngOnInit(): void {
@@ -63,6 +85,8 @@ export class CrosswordGameComponent implements OnInit {
             : this._currentWord = words[0];
 
         this._currentCell = cell;
+
+        this.showSnackbar();
 
         event.stopPropagation();
     }
@@ -165,7 +189,7 @@ export class CrosswordGameComponent implements OnInit {
 
     public _setCurrentCellChar(char: string): void {
         this._currentCell.value = char;
-        // this._checkWordSuccess(this._currentWord);
+        this._checkWordSuccess(this._currentWord);
 
         if (this._currentCell.success) {
             this._clearCurrents();

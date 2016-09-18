@@ -12,6 +12,10 @@
             </tr>
         </table>
     </div>
+    <div *ngIf="snackbarActive" class="mdl-js-snackbar mdl-snackbar mdl-snackbar--active animated {{snackbarStyle}}">
+        <div class="mdl-snackbar__text">{{snackbarText}}</div>
+        <button class="mdl-snackbar__action" type="button"></button>
+    </div>
     <!--
     <win-app-bar>
         <win-app-bar-command icon="'solidstar'" label="'Открыть букву'" 
