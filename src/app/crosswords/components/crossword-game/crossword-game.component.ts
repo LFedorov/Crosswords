@@ -23,11 +23,11 @@ export class CrosswordGameComponent implements OnInit {
     public showQuestion() {
         this.snackbarActive = true;
         this.snackbarText = this._currentWord.question;
-        this.snackbarStyle = 'slideInDown';
+        this.snackbarStyle = 'slideInUp';
     }
 
     public hideQuestion() {
-        this.snackbarStyle = 'slideOutUp';
+        this.snackbarStyle = 'slideOutDown';
         setTimeout(() => {
             this.snackbarText = null;
             this.snackbarActive = false;
@@ -161,8 +161,12 @@ export class CrosswordGameComponent implements OnInit {
         }
 
         if (answer === word.answer.toUpperCase()) {
+            
             this._setWordCellsSuccess(word);
-            this.hideQuestion();
+
+            if (word === this._currentWord) {
+                this.hideQuestion();
+            }
         }
     }
 
@@ -187,11 +191,9 @@ export class CrosswordGameComponent implements OnInit {
 
     public _setCurrentCellChar(char: string): void {
         this._currentCell.value = char;
-        this._checkWordSuccess(this._currentWord);
 
-        if (this._currentCell.success) {
-            this._clearCurrents();
-            return;
+        for (let word of this.crossword.getWordsWhereCellInRange(this._currentCell)) {
+            this._checkWordSuccess(word);
         }
 
         this._selectNextCell();

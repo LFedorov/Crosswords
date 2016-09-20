@@ -71,12 +71,13 @@
 }
 
 :host .mdl-snackbar {
-    top: 54px;
     left: 0;
     max-width: 100%;
     min-width: 100%;
     width: 100%;
-    min-height: 48px;
+
+    height:80px;
+    min-height: 80px;
     max-height: 80px;
 }
 
@@ -90,5 +91,4 @@
 
 :host::-webkit-scrollbar {
     width: 0px;
-    /*background: transparent;*/
 }
