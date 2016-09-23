@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -6,14 +6,14 @@ import { Router, NavigationEnd } from '@angular/router';
   templateUrl: './root.component.html',
   styleUrls: ['./root.component.css']
 })
-export class RootComponent implements OnInit, AfterViewChecked {
+export class RootComponent implements OnInit {
   constructor(private _router: Router) {
   }
 
   ngOnInit() {
     // [mdl fix] hide sidebar after router changes
-    this._router.events.subscribe(e => {
-      if (e instanceof NavigationEnd) {
+    this._router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
         let drawer = document.querySelector('.mdl-layout__drawer');
         let obfuscator = document.querySelector('.mdl-layout__obfuscator');
 
@@ -26,10 +26,5 @@ export class RootComponent implements OnInit, AfterViewChecked {
         }
       }
     });
-  }
-
-  ngAfterViewChecked() {
-    // [mdl fix]
-    componentHandler.upgradeAllRegistered();
   }
 }
