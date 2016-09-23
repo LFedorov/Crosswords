@@ -3,6 +3,8 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Axis, Word, Crossword, RawCrossword } from '../../shared/models';
 
+import 'rxjs/add/operator/map';
+
 @Injectable()
 export class CrosswordsService {
     private crosswordsListUrl: string = 'api/crosswords/list.json';
