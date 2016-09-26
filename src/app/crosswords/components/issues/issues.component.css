@@ -1,0 +1,19 @@
+:host .issue-box {
+    cursor: pointer;
+    text-align: center;
+    width: 90%;
+    min-width: 110px;
+    height: 140px;
+    margin: 0 auto;
+    position: relative;
+}
+
+:host .issue-box__text {
+    font-size: 1.2em;
+    line-height: 40px;
+}
+
+:host .issue-box__number {
+    font-size: 2em;
+    line-height: 80px;
+}

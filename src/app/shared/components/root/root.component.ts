@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { Router, NavigationEnd } from '@angular/router';
   templateUrl: './root.component.html',
   styleUrls: ['./root.component.css']
 })
-export class RootComponent implements OnInit, AfterViewChecked {
+export class RootComponent implements OnInit {
   constructor(private _router: Router) {
   }
 
@@ -26,10 +26,5 @@ export class RootComponent implements OnInit, AfterViewChecked {
         }
       }
     });
-  }
-
-  ngAfterViewChecked() {
-    // [mdl fix]
-    componentHandler.upgradeAllRegistered();
   }
 }

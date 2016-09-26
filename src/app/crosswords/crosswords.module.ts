@@ -2,8 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CrosswordsRouter } from './crosswords.router';
 import { CrosswordsService } from './services/crosswords.service';
-import { CrosswordListComponent } from './components/crossword-list';
-import { CrosswordGameComponent } from './components/crossword-game';
+
+import { IssuesComponent } from './components/issues/issues.component';
+import { IssueComponent } from './components/issue/issue.component';
+import { CrosswordComponent } from './components/crossword/crossword.component';
+
 
 @NgModule({
     imports: [
@@ -11,12 +14,12 @@ import { CrosswordGameComponent } from './components/crossword-game';
         CrosswordsRouter
     ],
     declarations: [
-        CrosswordListComponent,
-        CrosswordGameComponent
+        IssuesComponent,
+        IssueComponent,
+        CrosswordComponent
     ],
     providers: [
         CrosswordsService
     ]
 })
-export class CrosswordsModule {
-}
+export class CrosswordsModule { }

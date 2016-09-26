@@ -4,11 +4,11 @@ import { Cell, Word, Crossword } from 'app/shared/models';
 import { CrosswordsService } from '../../services';
 
 @Component({
-    selector: 'app-crossword-game',
-    templateUrl: './crossword-game.component.html',
-    styleUrls: ['./crossword-game.component.css']
+    selector: 'app-crossword',
+    templateUrl: './crossword.component.html',
+    styleUrls: ['./crossword.component.css']
 })
-export class CrosswordGameComponent implements OnInit {
+export class CrosswordComponent implements OnInit {
     private _currentWord: Word;
     private _currentCell: Cell;
     public crossword: Crossword;
