@@ -17,9 +17,9 @@ export class IssuesComponent implements OnInit {
 
     public ngOnInit(): void {
         this._crosswordsService
-            .countIssues()
-            .then(count => {
-                for (let i = 1; i <= count; i++) {
+            .getIssues()
+            .then(total => {
+                for (let i = 1; i <= total; i++) {
                     this._issues.push(i);
                 }
             });

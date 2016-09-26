@@ -12,7 +12,7 @@ export class CrosswordsService {
     constructor(private _http: Http) {
     }
 
-    public countIssues(): Promise<number> {
+    public getIssues(): Promise<number> {
         return this._http
             .get('api/crosswords/count.json')
             .toPromise()
@@ -38,7 +38,7 @@ export class CrosswordsService {
             .map(json => { return this.converJsonToInfoArray(json); });
     }
 
-    public getById(id: string): Observable<Crossword> {
+    public getCrossword(id: string): Observable<Crossword> {
         return this._http
             .get('api/crosswords/' + id + '.json')
             .map(response => response.json())
