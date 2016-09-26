@@ -1,10 +1,14 @@
+// Angular2
 import { Routes, RouterModule } from '@angular/router';
-import { CrosswordListComponent } from './components/crossword-list';
-import { CrosswordGameComponent } from './components/crossword-game';
+
+// App Components
+import { IssuesComponent } from './components/issues/issues.component';
+import { IssueComponent } from './components/issue/issue.component';
+import { CrosswordComponent } from './components/crossword/crossword.component';
 
 const routes: Routes = [
-    { path: '', component: CrosswordListComponent },
-    { path: ':id', component: CrosswordGameComponent }
+    { path: '', component: IssuesComponent },
+    { path: ':id', component: IssueComponent }
 ];
 
 export const CrosswordsRouter = RouterModule.forChild(routes);

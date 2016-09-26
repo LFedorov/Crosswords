@@ -1,16 +1,22 @@
+// Angular 2
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+// App Models
 import { RawCrossword } from 'app/shared/models';
+
+// App Services
 import { CrosswordsService } from '../../services';
 
 @Component({
-    selector: 'app-crossword-list',
-    templateUrl: './crossword-list.component.html',
-    styleUrls: ['./crossword-list.component.css']
+    selector: 'app-issue',
+    templateUrl: './issue.component.html',
+    styleUrls: ['./issue.component.css']
 })
-export class CrosswordListComponent implements OnInit {
+export class IssueComponent implements OnInit {
     public crosswords: Array<RawCrossword> = new Array<RawCrossword>();
 
-    constructor(private _crosswordsService: CrosswordsService) {
+    constructor(private _route: ActivatedRoute, private _crosswordsService: CrosswordsService) {
     }
 
     public ngOnInit(): void {
