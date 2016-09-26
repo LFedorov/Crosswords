@@ -8,7 +8,8 @@ import { CrosswordComponent } from './components/crossword/crossword.component';
 
 const routes: Routes = [
     { path: '', component: IssuesComponent },
-    { path: ':id', component: IssueComponent }
+    { path: 'issue/:issueId', component: IssueComponent },
+    { path: 'issue/:issueId/:crosswordId', component: CrosswordComponent }
 ];
 
 export const CrosswordsRouter = RouterModule.forChild(routes);

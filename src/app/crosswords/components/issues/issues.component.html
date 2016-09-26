@@ -1,6 +1,6 @@
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--2-col" *ngFor="let issue of issues">
-        <div class="issue-box mdl-color--blue-grey-300 mdl-color-text--white" routerLink="{{issue}}">
+        <div class="issue-box mdl-color--blue-grey-300 mdl-color-text--white" routerLink="issue/{{issue}}">
             <div class="issue-box__text">Выпуск</div>
             <div class="issue-box__number"># {{issue}}</div>
         </div>

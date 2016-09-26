@@ -14,16 +14,20 @@ import { CrosswordsService } from '../../services';
     styleUrls: ['./issue.component.css']
 })
 export class IssueComponent implements OnInit {
-    public crosswords: Array<RawCrossword> = new Array<RawCrossword>();
+    private _crosswords: Array<RawCrossword> = new Array<RawCrossword>();
 
     constructor(private _route: ActivatedRoute, private _crosswordsService: CrosswordsService) {
     }
 
     public ngOnInit(): void {
         this._crosswordsService
-            .list()
+            .getIssue(this._route.snapshot.params['issueId'])
             .subscribe(crosswords => {
-                this.crosswords = crosswords;
+                this._crosswords = crosswords;
             });
+    }
+
+    public get crosswords(): Array<RawCrossword> {
+        return this._crosswords;
     }
 }

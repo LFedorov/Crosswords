@@ -36,7 +36,7 @@ export class CrosswordComponent implements OnInit {
 
     public ngOnInit(): void {
         this._crosswordsService
-            .getById(this._route.snapshot.params['id'])
+            .getById(this._route.snapshot.params['crosswordId'])
             .subscribe((crossword: Crossword) => {
                 this.crossword = crossword;
             });
@@ -161,7 +161,6 @@ export class CrosswordComponent implements OnInit {
         }
 
         if (answer === word.answer.toUpperCase()) {
-            
             this._setWordCellsSuccess(word);
 
             if (word === this._currentWord) {

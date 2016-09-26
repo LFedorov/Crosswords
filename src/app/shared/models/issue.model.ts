@@ -6,9 +6,13 @@ export class Issue {
         this._id = id;
     }
 
-    public get id(): number { return this._id }
+    public get id(): number {
+        return this._id;
+    }
 
-    public get crosswords(): Array<string> { return this._crosswords; }
+    public get crosswords(): Array<string> {
+        return this._crosswords;
+    }
 
     public addCrossword(id: string): void {
         this._crosswords.push(id);

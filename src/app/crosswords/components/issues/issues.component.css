@@ -6,14 +6,21 @@
     height: 140px;
     margin: 0 auto;
     position: relative;
+
+    line-height: 40px;
+    display: flex;
+    /*align-items: center;*/
+    justify-content: center;
+    flex-direction: column;
 }
 
 :host .issue-box__text {
+    margin-top: -20px;
     font-size: 1.2em;
-    line-height: 40px;
+    /*line-height: 40px;*/
 }
 
 :host .issue-box__number {
-    font-size: 2em;
-    line-height: 80px;
+    font-size: 3em;
+    /*line-height: 80px;*/
 }

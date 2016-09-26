@@ -2,15 +2,13 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { Axis, Word, Crossword, RawCrossword, Issue } from '../../shared/models';
+import { Axis, Word, Crossword, RawCrossword } from '../../shared/models';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class CrosswordsService {
-    private crosswordsListUrl: string = 'api/crosswords/list.json';
-
     constructor(private _http: Http) {
     }
 
@@ -34,12 +32,8 @@ export class CrosswordsService {
     }
 
     public getIssue(id: number) {
-
-    }
-
-    public list(): Observable<Array<RawCrossword>> {
         return this._http
-            .get(this.crosswordsListUrl)
+            .get(`api/crosswords/list/page${id}.json`)
             .map(response => response.json())
             .map(json => { return this.converJsonToInfoArray(json); });
     }
@@ -55,16 +49,16 @@ export class CrosswordsService {
         let crosswordInfoArray = new Array<RawCrossword>();
 
         json.Crosswords.forEach(crossword => {
-            let crosswordInfo = this.convertJsonToInfo(crossword);
+            let crosswordInfo = new RawCrossword(crossword);
             crosswordInfoArray.push(crosswordInfo);
         });
 
         return crosswordInfoArray;
     }
 
-    private convertJsonToInfo(json: any): RawCrossword {
-        return new RawCrossword(json.Id);
-    }
+    // private convertJsonToInfo(json: any): RawCrossword {
+    //     return new RawCrossword(json);
+    // }
 
     private converJsonToCrossword(json: any): Crossword {
         let id = json.Id;

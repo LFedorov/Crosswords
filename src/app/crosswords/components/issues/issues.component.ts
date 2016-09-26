@@ -10,7 +10,7 @@ import { CrosswordsService } from '../../services';
     styleUrls: ['./issues.component.css']
 })
 export class IssuesComponent implements OnInit {
-    private _issues: Array<number>;
+    private _issues: Array<number> = new Array<number>();;
 
     constructor(private _crosswordsService: CrosswordsService) {
     }
@@ -19,8 +19,6 @@ export class IssuesComponent implements OnInit {
         this._crosswordsService
             .countIssues()
             .then(count => {
-                this._issues = new Array<number>();
-
                 for (let i = 1; i <= count; i++) {
                     this._issues.push(i);
                 }
