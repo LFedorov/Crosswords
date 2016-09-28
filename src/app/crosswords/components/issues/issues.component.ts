@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 
 // App Services
-import { CrosswordsService } from '../../services';
+import { CrosswordsService } from '../../services/crosswords.service';
 
 @Component({
     selector: 'app-crosswords-issues',
