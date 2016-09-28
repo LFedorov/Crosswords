@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Cell, Word, Crossword } from 'app/shared/models';
+import { Cell, Word, Crossword } from '../../models';
 import { CrosswordsService } from '../../services';
 
 @Component({
