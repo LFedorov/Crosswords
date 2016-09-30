@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Axis, Word, Crossword, RawCrossword } from '../models';
 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -13,21 +14,13 @@ export class CrosswordsService {
     }
 
     public getIssues(): Promise<number> {
+        let crosswordsPerIssue = 20;
         return this._http
             .get('api/crosswords/count.json')
             .toPromise()
             .then(response => response.json())
             .then(json => {
-                let crosswordsPerIssue = 20;
-
-                // Only full issues
-                // return Math.floor(json.Count / crosswordsPerIssue);
-
-                // Raw issues
                 return Math.ceil(json.Count / crosswordsPerIssue);
-            })
-            .catch(() => {
-                return 2;
             });
     }
 
@@ -55,10 +48,6 @@ export class CrosswordsService {
 
         return crosswordInfoArray;
     }
-
-    // private convertJsonToInfo(json: any): RawCrossword {
-    //     return new RawCrossword(json);
-    // }
 
     private converJsonToCrossword(json: any): Crossword {
         let id = json.Id;
