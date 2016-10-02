@@ -20,12 +20,6 @@ export class CrosswordsService {
             .toPromise()
             .then(response => response.json())
             .then(json => {
-                let crosswordsPerIssue = 5;
-
-                // Only full issues
-                // return Math.floor(json.Count / crosswordsPerIssue);
-
-                // Raw issues
                 return Math.ceil(json.Count / crosswordsPerIssue);
             });
     }
