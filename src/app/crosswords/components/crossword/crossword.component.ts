@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Cell, Word, Crossword } from 'app/shared/models';
-import { CrosswordsService } from '../../services';
+import { Cell, Word, Crossword } from '../../models';
+import { CrosswordsService } from '../../services/crosswords.service';
 
 @Component({
     selector: 'app-crossword',

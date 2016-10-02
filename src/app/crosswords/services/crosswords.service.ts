@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { Axis, Word, Crossword, RawCrossword } from '../../shared/models';
+import { Axis, Word, Crossword, RawCrossword } from '../models';
 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -13,21 +14,22 @@ export class CrosswordsService {
     }
 
     public getIssues(): Promise<number> {
+        let crosswordsPerIssue = 20;
         return this._http
             .get('api/crosswords/count.json')
             .toPromise()
             .then(response => response.json())
             .then(json => {
+<<<<<<< HEAD
                 let crosswordsPerIssue = 5;
 
                 // Only full issues
                 // return Math.floor(json.Count / crosswordsPerIssue);
 
                 // Raw issues
+=======
+>>>>>>> ea23d1ddb3dcabfda2886622e2febc5d7535d5a2
                 return Math.ceil(json.Count / crosswordsPerIssue);
-            })
-            .catch(() => {
-                return 2;
             });
     }
 
@@ -55,10 +57,6 @@ export class CrosswordsService {
 
         return crosswordInfoArray;
     }
-
-    // private convertJsonToInfo(json: any): RawCrossword {
-    //     return new RawCrossword(json);
-    // }
 
     private converJsonToCrossword(json: any): Crossword {
         let id = json.Id;

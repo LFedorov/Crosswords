@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 // App Models
-import { RawCrossword } from 'app/shared/models';
+import { RawCrossword } from '../../models';
 
 // App Services
-import { CrosswordsService } from '../../services';
+import { CrosswordsService } from '../../services/crosswords.service';
 
 @Component({
     selector: 'app-issue',

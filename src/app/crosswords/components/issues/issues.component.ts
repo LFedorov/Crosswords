@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 
 // App Services
-import { CrosswordsService } from '../../services';
+import { CrosswordsService } from '../../services/crosswords.service';
 
 @Component({
     selector: 'app-crosswords-issues',
@@ -10,7 +10,7 @@ import { CrosswordsService } from '../../services';
     styleUrls: ['./issues.component.css']
 })
 export class IssuesComponent implements OnInit {
-    private _issues: Array<number> = new Array<number>();;
+    private _issues: Array<number> = new Array<number>();
 
     constructor(private _crosswordsService: CrosswordsService) {
     }
