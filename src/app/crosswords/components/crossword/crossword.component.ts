@@ -45,6 +45,7 @@ export class CrosswordComponent implements OnInit {
     private _clearCurrents(): void {
         this._currentWord = null;
         this._currentCell = null;
+        this.hideQuestion();
     }
 
     public isSelected(cell: Cell): boolean {

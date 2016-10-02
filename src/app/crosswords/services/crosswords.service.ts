@@ -18,7 +18,7 @@ export class CrosswordsService {
             .toPromise()
             .then(response => response.json())
             .then(json => {
-                let crosswordsPerIssue = 20;
+                let crosswordsPerIssue = 5;
 
                 // Only full issues
                 // return Math.floor(json.Count / crosswordsPerIssue);
