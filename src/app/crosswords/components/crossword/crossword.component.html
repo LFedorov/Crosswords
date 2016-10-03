@@ -16,22 +16,4 @@
         <div class="mdl-snackbar__text">{{snackbarText}}</div>
         <button class="mdl-snackbar__action" type="button" (click)="hideQuestion();$event.stopPropagation();">Скрыть</button>
     </div>
-    <!--
-    <win-app-bar>
-        <win-app-bar-command icon="'solidstar'" label="'Открыть букву'" 
-            disabled="vm.isOpenCharCommandDisabled();" 
-            ng-click="vm.OpenLetter();">
-        </win-app-bar-command>
-        <win-app-bar-separator></win-app-bar-separator>
-        <win-app-bar-command icon="'help'" label="'Показать вопрос'"
-            disabled="vm.isShowQuestionDialogCommandDisabled();"
-            ng-click="vm.ShowQuestionDialog();" >
-        </win-app-bar-command>
-    </win-app-bar>
-    <win-content-dialog primary-command-text="'Закрыть'" 
-        hidden="vm.questionDialog.Hidden" 
-        title="vm.questionDialog.Title">
-        <p ng-bind="vm.questionDialog.Text">
-        </p>
-    </win-content-dialog>-->
 </section>
