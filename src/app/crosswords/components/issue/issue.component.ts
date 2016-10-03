@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 // App Models
-import { RawCrossword } from '../../models';
+import { RawCrossword } from '../../models/raw-crossword.model';
 
 // App Services
 import { CrosswordsService } from '../../services/crosswords.service';

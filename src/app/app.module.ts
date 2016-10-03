@@ -2,9 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { AppRoutes } from './app.router';
-import { RootComponent } from './shared/components';
-import { HeaderComponent } from './shared/components';
-import { SidebarComponent } from './shared/components';
+import { RootComponent } from './shared/components/root/root.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 
 @NgModule({
   imports: [

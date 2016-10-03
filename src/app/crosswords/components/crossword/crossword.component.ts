@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Cell, Word, Crossword } from '../../models';
+
+import { Cell } from '../../models/cell.model';
+import { Word } from '../../models/word.model';
+import { Crossword } from '../../models/crossword.model';
+
 import { CrosswordsService } from '../../services/crosswords.service';
 
 @Component({
