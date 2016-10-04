@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+import { DatabaseService } from './database.service';
 import { Axis, Word } from '../models/word.model';
 import { Crossword } from '../models/crossword.model';
 import { RawCrossword } from '../models/raw-crossword.model';
@@ -12,7 +13,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class CrosswordsService {
-    constructor(private _http: Http) {
+    constructor(private _http: Http, private _db: DatabaseService) {
     }
 
     public getIssues(): Promise<number> {
@@ -30,7 +31,7 @@ export class CrosswordsService {
         return this._http
             .get(`api/crosswords/list/page${id}.json`)
             .map(response => response.json())
-            .map(json => { return this.converJsonToInfoArray(json); });
+            .map(json => { return this.converJsonToIssue(json); });
     }
 
     public getCrossword(id: string): Observable<Crossword> {
@@ -40,7 +41,7 @@ export class CrosswordsService {
             .map(json => { return this.converJsonToCrossword(json); });
     }
 
-    private converJsonToInfoArray(json: any): Array<RawCrossword> {
+    private converJsonToIssue(json: any): Array<RawCrossword> {
         let crosswordInfoArray = new Array<RawCrossword>();
 
         json.Crosswords.forEach(crossword => {
