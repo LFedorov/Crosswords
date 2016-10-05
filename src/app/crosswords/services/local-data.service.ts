@@ -18,8 +18,7 @@ export class LocalDataService {
             };
 
             request.onsuccess = () => {
-                let database: IDBDatabase = request.result;
-                resolve(database);
+                resolve(request.result);
             };
 
             request.onerror = (error) => {
