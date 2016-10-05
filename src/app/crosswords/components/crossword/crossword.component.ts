@@ -41,7 +41,7 @@ export class CrosswordComponent implements OnInit {
     public ngOnInit(): void {
         this._crosswordsService
             .getCrossword(this._route.snapshot.params['crosswordId'])
-            .subscribe((crossword: Crossword) => {
+            .then((crossword: Crossword) => {
                 this.crossword = crossword;
             });
     }

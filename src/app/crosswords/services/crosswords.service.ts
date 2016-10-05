@@ -2,76 +2,39 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { DatabaseService } from './database.service';
+import { LocalDataService } from './local-data.service';
+import { RemoteDataService } from './remote-data.service';
+
 import { Axis, Word } from '../models/word.model';
 import { Crossword } from '../models/crossword.model';
 import { RawCrossword } from '../models/raw-crossword.model';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/toPromise';
-
 @Injectable()
 export class CrosswordsService {
-    constructor(private _http: Http, private _db: DatabaseService) {
+    constructor(private _http: Http, private _localData: LocalDataService, private _remoteData: RemoteDataService) {
     }
 
     public getIssues(): Promise<number> {
-        let crosswordsPerIssue = 20;
-        return this._http
-            .get('api/crosswords/count.json')
-            .toPromise()
-            .then(response => response.json())
-            .then(json => {
-                return Math.ceil(json.Count / crosswordsPerIssue);
-            });
+        return new Promise((resolve, reject) => {
+            let crosswordsPerIssue = 20;
+
+            this._remoteData
+                .getIssues(crosswordsPerIssue)
+                .then(issues => resolve(issues))
+                .catch(() => {
+                    this._localData
+                        .getIssues(crosswordsPerIssue)
+                        .then(issues => resolve(issues));
+                })
+                .catch((error) => { reject(error) });
+        });
     }
 
     public getIssue(id: number) {
-        return this._http
-            .get(`api/crosswords/list/page${id}.json`)
-            .map(response => response.json())
-            .map(json => { return this.converJsonToIssue(json); });
+        return this._remoteData.getIssue(id);
     }
 
-    public getCrossword(id: string): Observable<Crossword> {
-        return this._http
-            .get('api/crosswords/' + id + '.json')
-            .map(response => response.json())
-            .map(json => { return this.converJsonToCrossword(json); });
-    }
-
-    private converJsonToIssue(json: any): Array<RawCrossword> {
-        let crosswordInfoArray = new Array<RawCrossword>();
-
-        json.Crosswords.forEach(crossword => {
-            let crosswordInfo = new RawCrossword(crossword);
-            crosswordInfoArray.push(crosswordInfo);
-        });
-
-        return crosswordInfoArray;
-    }
-
-    private converJsonToCrossword(json: any): Crossword {
-        let id = json.Id;
-        let words: Array<Word> = new Array<Word>();
-
-        json.Words.forEach(word => {
-            let crosswordWord = this.convertJsonToWord(word);
-            words.push(crosswordWord);
-        });
-
-        return new Crossword(id, words);
-    }
-
-    private convertJsonToWord(json: any): Word {
-        let x = json.X;
-        let y = json.Y;
-        let clue = json.Clue;
-        let question = json.Question;
-        let answer = json.Answer;
-        let axis = json.Axis === 'X' ? Axis.x : json.Axis === 'Y' ? Axis.y : null;
-
-        return new Word(x, y, clue, axis, question, answer);
+    public getCrossword(id: string): Promise<Crossword> {
+        return this._remoteData.getCrossword(id);
     }
 }

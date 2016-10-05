@@ -22,7 +22,7 @@ export class IssueComponent implements OnInit {
     public ngOnInit(): void {
         this._crosswordsService
             .getIssue(this._route.snapshot.params['issueId'])
-            .subscribe(crosswords => {
+            .then(crosswords => {
                 this._crosswords = crosswords;
             });
     }

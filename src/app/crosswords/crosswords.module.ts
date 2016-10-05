@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CrosswordsRouter } from './crosswords.router';
 
-import { DatabaseService } from './services/database.service';
+import { LocalDataService } from './services/local-data.service';
+import { RemoteDataService } from './services/remote-data.service';
 import { CrosswordsService } from './services/crosswords.service';
 
 import { IssuesComponent } from './components/issues/issues.component';
@@ -20,7 +21,8 @@ import { CrosswordComponent } from './components/crossword/crossword.component';
         CrosswordComponent
     ],
     providers: [
-        DatabaseService,
+        LocalDataService,
+        RemoteDataService,
         CrosswordsService
     ]
 })

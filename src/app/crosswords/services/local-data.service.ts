@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class DatabaseService {
+export class LocalDataService {
     constructor() {
     }
 
@@ -20,15 +20,15 @@ export class DatabaseService {
             request.onsuccess = () => {
                 let database: IDBDatabase = request.result;
                 resolve(database);
-            }
+            };
 
             request.onerror = (error) => {
                 reject(error);
-            }
+            };
         });
     }
 
-    public getIssues(): Promise<number> {
+    public getIssues(crosswordsPerIssue: number): Promise<number> {
         return new Promise((resolve, reject) => {
             this._connect()
                 .then(database => {
@@ -40,11 +40,11 @@ export class DatabaseService {
                     request.onsuccess = () => {
                         let count = request.result;
                         resolve(count);
-                    }
+                    };
 
                     request.onerror = (error) => {
                         reject(error);
-                    }
+                    };
                 });
         });
     }
