@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
 
 import { Axis, Word } from '../models/word.model';
 import { Crossword } from '../models/crossword.model';

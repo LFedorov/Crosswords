@@ -1,17 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-
 import { LocalDataService } from './local-data.service';
 import { RemoteDataService } from './remote-data.service';
 
-import { Axis, Word } from '../models/word.model';
 import { Crossword } from '../models/crossword.model';
-import { RawCrossword } from '../models/raw-crossword.model';
 
 @Injectable()
 export class CrosswordsService {
-    constructor(private _http: Http, private _localData: LocalDataService, private _remoteData: RemoteDataService) {
+    constructor(private _localData: LocalDataService, private _remoteData: RemoteDataService) {
     }
 
     public getIssues(): Promise<number> {
@@ -26,7 +21,7 @@ export class CrosswordsService {
                         .getIssues(crosswordsPerIssue)
                         .then(issues => resolve(issues));
                 })
-                .catch((error) => { reject(error) });
+                .catch((error) => reject(error));
         });
     }
 
