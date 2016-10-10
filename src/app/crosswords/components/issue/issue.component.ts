@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 // App Models
+import { Issue } from '../../models/issue.model';
 import { RawCrossword } from '../../models/raw-crossword.model';
 
 // App Services
@@ -22,8 +23,11 @@ export class IssueComponent implements OnInit {
     public ngOnInit(): void {
         this._crosswordsService
             .getIssue(this._route.snapshot.params['issueId'])
-            .then(crosswords => {
-                this._crosswords = crosswords;
+            .then(issue => {
+                this._crosswords = new Array<RawCrossword>()
+                issue.crosswords.forEach(id => {
+                    this._crosswords.push(new RawCrossword(id));
+                });
             });
     }
 

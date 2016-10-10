@@ -15,7 +15,7 @@ export class LocalDataService {
                 let database: IDBDatabase = request.result;
 
                 database.createObjectStore('Issues', { keyPath: 'id' });
-                database.createObjectStore('Crosswords', { keyPath: 'id' })
+                database.createObjectStore('Crosswords', { keyPath: 'id' });
 
                 resolve(database);
             };

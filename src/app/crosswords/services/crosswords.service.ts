@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LocalDataService } from './local-data.service';
 import { RemoteDataService } from './remote-data.service';
 
+import { Issue } from '../models/issue.model';
 import { Crossword } from '../models/crossword.model';
 
 @Injectable()
@@ -25,7 +26,7 @@ export class CrosswordsService {
         });
     }
 
-    public getIssue(id: number) {
+    public getIssue(id: number): Promise<Issue> {
         return new Promise((resolve, reject) => {
             this._localData
                 .getIssue(id)
