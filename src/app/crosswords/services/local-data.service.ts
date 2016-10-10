@@ -56,6 +56,19 @@ export class LocalDataService {
         });
     }
 
+    public saveIssue(issue: Issue): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this._connect()
+                .then(db => { return db.transaction('Issues', 'readwrite'); })
+                .then(tx => { return tx.objectStore('Issues'); })
+                .then(os => { return os.put(issue); })
+                .then(rq => {
+                    rq.onsuccess = () => resolve();
+                    rq.onerror = (error) => reject(error);
+                });
+        });
+    }
+
     public getCrossword(id: string): Promise<Crossword> {
         return new Promise((resolve, reject) => {
             this._connect()
