@@ -5,7 +5,7 @@ import { Issue } from '../models/issue.model';
 
 @Injectable()
 export class LocalDataService {
-    constructor() {}
+    constructor() { }
 
     private _connect(): Promise<IDBDatabase> {
         return new Promise<IDBDatabase>((resolve, reject) => {
@@ -48,6 +48,19 @@ export class LocalDataService {
             this._connect()
                 .then(db => { return db.transaction('Issues', 'readonly'); })
                 .then(tx => { return tx.objectStore('Issues'); })
+                .then(os => { return os.get(id); })
+                .then(rq => {
+                    rq.onsuccess = () => resolve(rq.result);
+                    rq.onerror = (error) => reject(error);
+                });
+        });
+    }
+
+    public getCrossword(id: string): Promise<Crossword> {
+        return new Promise((resolve, reject) => {
+            this._connect()
+                .then(db => { return db.transaction('Crosswords', 'readonly'); })
+                .then(tx => { return tx.objectStore('Crosswords'); })
                 .then(os => { return os.get(id); })
                 .then(rq => {
                     rq.onsuccess = () => resolve(rq.result);
