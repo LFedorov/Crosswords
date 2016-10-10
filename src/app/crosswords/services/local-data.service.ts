@@ -5,8 +5,7 @@ import { Issue } from '../models/issue.model';
 
 @Injectable()
 export class LocalDataService {
-    constructor() {
-    }
+    constructor() {}
 
     private _connect(): Promise<IDBDatabase> {
         return new Promise<IDBDatabase>((resolve, reject) => {
