@@ -1,8 +1,6 @@
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
-const routes: Routes = [
+export const AppRouterModule = RouterModule.forRoot([
     { 'path': '', redirectTo: 'crosswords', pathMatch: 'full' },
     { 'path': 'crosswords', loadChildren: 'app/crosswords/crosswords.module#CrosswordsModule' }
-];
-
-export const AppRoutes = RouterModule.forRoot(routes);
+]);

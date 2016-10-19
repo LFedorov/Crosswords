@@ -4,7 +4,6 @@ import { Http } from '@angular/http';
 import { Axis, Word } from '../models/word.model';
 import { Crossword } from '../models/crossword.model';
 import { Issue } from '../models/issue.model';
-import { RawCrossword } from '../models/raw-crossword.model';
 
 @Injectable()
 export class RemoteDataService {
@@ -28,8 +27,8 @@ export class RemoteDataService {
             .then(response => response.json())
             .then(json => {
                 let issue = new Issue(id);
-                json.Crosswords.forEach(id => {
-                    issue.addCrossword(id);
+                json.Crosswords.forEach(crosswordId => {
+                    issue.addCrossword(crosswordId);
                 });
 
                 return issue;
