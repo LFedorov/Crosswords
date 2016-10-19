@@ -7,34 +7,35 @@ import { Issue } from '../models/issue.model';
 export class LocalDataService {
     constructor() { }
 
-    private _connect(): Promise<IDBDatabase> {
+    private connectDatabase(): Promise<IDBDatabase> {
         return new Promise<IDBDatabase>((resolve, reject) => {
             let request = window.indexedDB.open('Crosswords');
 
             request.onupgradeneeded = () => {
-                let database: IDBDatabase = request.result;
-
-                database.createObjectStore('Issues', { keyPath: 'id' });
-                database.createObjectStore('Crosswords', { keyPath: 'id' });
-
-                resolve(database);
+                request.result.createObjectStore('Issues', { keyPath: 'id' });
+                resolve(this.connectDatabase());
             };
 
-            request.onsuccess = () => {
-                resolve(request.result);
-            };
-
-            request.onerror = (error) => {
-                reject(error);
-            };
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = (error) => reject(error);
         });
+    }
+
+    private getReadObjectStore(): Promise<IDBObjectStore> {
+        return this.connectDatabase()
+            .then(db => { return db.transaction('Issues', 'readonly'); })
+            .then(tx => { return tx.objectStore('Issues'); });
+    }
+
+    private getWriteObjectStore(): Promise<IDBObjectStore> {
+        return this.connectDatabase()
+            .then(db => { return db.transaction('Issues', 'readwrite'); })
+            .then(tx => { return tx.objectStore('Issues'); });
     }
 
     public getIssues(crosswordsPerIssue: number): Promise<number> {
         return new Promise((resolve, reject) => {
-            this._connect()
-                .then(db => { return db.transaction('Issues', 'readonly'); })
-                .then(tx => { return tx.objectStore('Issues'); })
+            this.getReadObjectStore()
                 .then(os => { return os.count(); })
                 .then(rq => {
                     rq.onsuccess = () => resolve(rq.result);
@@ -45,9 +46,7 @@ export class LocalDataService {
 
     public getIssue(id: number): Promise<Issue> {
         return new Promise((resolve, reject) => {
-            this._connect()
-                .then(db => { return db.transaction('Issues', 'readonly'); })
-                .then(tx => { return tx.objectStore('Issues'); })
+            this.getReadObjectStore()
                 .then(os => { return os.get(id); })
                 .then(rq => {
                     rq.onsuccess = () => resolve(rq.result);
@@ -58,9 +57,7 @@ export class LocalDataService {
 
     public saveIssue(issue: Issue): Promise<void> {
         return new Promise((resolve, reject) => {
-            this._connect()
-                .then(db => { return db.transaction('Issues', 'readwrite'); })
-                .then(tx => { return tx.objectStore('Issues'); })
+            this.getWriteObjectStore()
                 .then(os => { return os.put(issue); })
                 .then(rq => {
                     rq.onsuccess = () => resolve();
@@ -71,9 +68,7 @@ export class LocalDataService {
 
     public getCrossword(id: string): Promise<Crossword> {
         return new Promise((resolve, reject) => {
-            this._connect()
-                .then(db => { return db.transaction('Crosswords', 'readonly'); })
-                .then(tx => { return tx.objectStore('Crosswords'); })
+            this.getReadObjectStore()
                 .then(os => { return os.get(id); })
                 .then(rq => {
                     rq.onsuccess = () => resolve(rq.result);
@@ -84,9 +79,7 @@ export class LocalDataService {
 
     public saveCrossword(crossword: Crossword): Promise<void> {
         return new Promise((resolve, reject) => {
-            this._connect()
-                .then(db => { return db.transaction('Crosswords', 'readwrite'); })
-                .then(tx => { return tx.objectStore('Crosswords'); })
+            this.getWriteObjectStore()
                 .then(os => { return os.put(crossword); })
                 .then(rq => {
                     rq.onsuccess = () => resolve();
