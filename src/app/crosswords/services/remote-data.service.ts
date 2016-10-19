@@ -32,7 +32,7 @@ export class RemoteDataService {
 
     public getCrossword(id: string): Promise<Crossword> {
         return this._http
-            .get('api/crosswords/' + id + '.json')
+            .get(`api/crosswords/${id}.json`)
             .toPromise()
             .then(response => response.json())
             .then(json => {
