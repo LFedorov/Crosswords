@@ -13,6 +13,7 @@ export class LocalDataService {
 
             request.onupgradeneeded = () => {
                 request.result.createObjectStore('Issues', { keyPath: 'id' });
+                request.result.createObjectStore('Crosswords', { keyPath: 'id' });
                 resolve(this.connectDatabase());
             };
 
@@ -21,21 +22,21 @@ export class LocalDataService {
         });
     }
 
-    private getReadObjectStore(): Promise<IDBObjectStore> {
+    private getReadObjectStore(storeName: string): Promise<IDBObjectStore> {
         return this.connectDatabase()
-            .then(db => { return db.transaction('Issues', 'readonly'); })
-            .then(tx => { return tx.objectStore('Issues'); });
+            .then(db => { return db.transaction(storeName, 'readonly'); })
+            .then(tx => { return tx.objectStore(storeName); });
     }
 
-    private getWriteObjectStore(): Promise<IDBObjectStore> {
+    private getWriteObjectStore(storeName: string): Promise<IDBObjectStore> {
         return this.connectDatabase()
-            .then(db => { return db.transaction('Issues', 'readwrite'); })
-            .then(tx => { return tx.objectStore('Issues'); });
+            .then(db => { return db.transaction(storeName, 'readwrite'); })
+            .then(tx => { return tx.objectStore(storeName); });
     }
 
     public getIssues(crosswordsPerIssue: number): Promise<number> {
         return new Promise((resolve, reject) => {
-            this.getReadObjectStore()
+            this.getReadObjectStore('Issues')
                 .then(os => { return os.count(); })
                 .then(rq => {
                     rq.onsuccess = () => resolve(rq.result);
@@ -46,7 +47,7 @@ export class LocalDataService {
 
     public getIssue(id: number): Promise<Issue> {
         return new Promise((resolve, reject) => {
-            this.getReadObjectStore()
+            this.getReadObjectStore('Issues')
                 .then(os => { return os.get(id); })
                 .then(rq => {
                     rq.onsuccess = () => resolve(rq.result);
@@ -57,7 +58,7 @@ export class LocalDataService {
 
     public saveIssue(issue: Issue): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.getWriteObjectStore()
+            this.getWriteObjectStore('Issues')
                 .then(os => { return os.put(issue); })
                 .then(rq => {
                     rq.onsuccess = () => resolve();
@@ -68,7 +69,7 @@ export class LocalDataService {
 
     public getCrossword(id: string): Promise<Crossword> {
         return new Promise((resolve, reject) => {
-            this.getReadObjectStore()
+            this.getReadObjectStore('Crosswords')
                 .then(os => { return os.get(id); })
                 .then(rq => {
                     rq.onsuccess = () => resolve(rq.result);
@@ -79,7 +80,7 @@ export class LocalDataService {
 
     public saveCrossword(crossword: Crossword): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.getWriteObjectStore()
+            this.getWriteObjectStore('Crosswords')
                 .then(os => { return os.put(crossword); })
                 .then(rq => {
                     rq.onsuccess = () => resolve();
