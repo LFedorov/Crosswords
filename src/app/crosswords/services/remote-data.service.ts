@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 
 import { Axis, Word } from '../models/word.model';
 import { Crossword } from '../models/crossword.model';
+import { Issue } from '../models/issue.model';
 import { RawCrossword } from '../models/raw-crossword.model';
 
 @Injectable()
@@ -20,13 +21,18 @@ export class RemoteDataService {
             });
     }
 
-    public getIssue(id: number) {
+    public getIssue(id: number): Promise<Issue> {
         return this._http
             .get(`api/crosswords/list/page${id}.json`)
             .toPromise()
             .then(response => response.json())
             .then(json => {
-                return this.converJsonToIssue(json);
+                let issue = new Issue(id);
+                json.Crosswords.forEach(id => {
+                    issue.addCrossword(id);
+                });
+
+                return issue;
             });
     }
 
@@ -38,17 +44,6 @@ export class RemoteDataService {
             .then(json => {
                 return this.converJsonToCrossword(json);
             });
-    }
-
-    private converJsonToIssue(json: any): Array<RawCrossword> {
-        let crosswordInfoArray = new Array<RawCrossword>();
-
-        json.Crosswords.forEach(crossword => {
-            let crosswordInfo = new RawCrossword(crossword);
-            crosswordInfoArray.push(crosswordInfo);
-        });
-
-        return crosswordInfoArray;
     }
 
     private converJsonToCrossword(json: any): Crossword {
