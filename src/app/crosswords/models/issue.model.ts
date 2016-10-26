@@ -1,6 +1,6 @@
 export class Issue {
     private _id: number;
-    private _crosswords: Array<string>;
+    private _crosswords: string[] = [];
 
     constructor(id: number) {
         this._id = id;
